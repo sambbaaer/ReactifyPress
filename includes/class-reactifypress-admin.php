@@ -100,14 +100,14 @@ class ReactifyPress_Admin {
         // Enqueue admin scripts and styles
         wp_enqueue_style(
             'reactifypress-admin-style',
-            REACTIFYPRESS_PLUGIN_URL . 'assets/css/admin.css',
+            REACTIFYPRESS_PLUGIN_URL . 'assets/css/reactifypress-admin.css',
             array(),
             REACTIFYPRESS_VERSION
         );
         
         wp_enqueue_script(
             'reactifypress-admin-script',
-            REACTIFYPRESS_PLUGIN_URL . 'assets/js/admin.js',
+            REACTIFYPRESS_PLUGIN_URL . 'assets/js/reactifypress-admin.js',
             array('jquery', 'wp-color-picker', 'jquery-ui-tabs', 'jquery-ui-sortable'),
             REACTIFYPRESS_VERSION,
             true

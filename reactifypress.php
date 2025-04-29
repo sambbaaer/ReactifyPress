@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: ReactifyPress
- * Plugin URI: https://example.com/reactifypress
+ * Plugin URI: https://samuelbaer.ch/reactifypress
  * Description: Ermöglicht Besuchern, auf Beiträge mit verschiedenen Emoticons zu reagieren, ähnlich wie bei sozialen Netzwerken.
  * Version: 1.0.0
  * Requires at least: 5.6
  * Requires PHP: 7.4
- * Author: YourName
- * Author URI: https://example.com
+ * Author: sambbaer
+ * Author URI: https://samuelbaer.ch
  * Text Domain: reactifypress
  * Domain Path: /languages
  */
