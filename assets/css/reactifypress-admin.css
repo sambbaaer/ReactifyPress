@@ -1,0 +1,235 @@
+/**
+ * ReactifyPress Admin Styles
+ */
+
+/* General styles */
+.reactifypress-settings-page {
+    max-width: 1000px;
+    margin: 20px 0;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.reactifypress-settings-page h1 {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.reactifypress-settings-page .notice {
+    margin: 15px 0;
+}
+
+/* Tabs */
+.reactifypress-tabs {
+    margin-top: 20px;
+}
+
+.reactifypress-tabs .ui-tabs-nav {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+}
+
+.reactifypress-tabs .ui-tabs-nav li {
+    margin: 0 5px 0 0;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background: #f5f5f5;
+}
+
+.reactifypress-tabs .ui-tabs-nav li.ui-tabs-active {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+}
+
+.reactifypress-tabs .ui-tabs-nav li a {
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+}
+
+.reactifypress-tabs .ui-tabs-panel {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+/* Form elements */
+.reactifypress-form-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reactifypress-form-table th {
+    padding: 15px 10px 15px 0;
+    text-align: left;
+    width: 200px;
+    vertical-align: top;
+}
+
+.reactifypress-form-table td {
+    padding: 15px 0;
+    vertical-align: top;
+}
+
+.reactifypress-form-table input[type="text"],
+.reactifypress-form-table select,
+.reactifypress-form-table textarea {
+    width: 300px;
+    max-width: 100%;
+}
+
+.reactifypress-form-table .description {
+    display: block;
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Reactions list */
+.reactifypress-reactions-list {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.reactifypress-reaction-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.reactifypress-reaction-item.reactifypress-reaction-inactive {
+    opacity: 0.6;
+}
+
+.reactifypress-reaction-handle {
+    cursor: move;
+    padding: 5px;
+    margin-right: 10px;
+    color: #999;
+}
+
+.reactifypress-reaction-handle:hover {
+    color: #666;
+}
+
+.reactifypress-reaction-icon-wrapper {
+    margin-right: 15px;
+    width: 40px;
+    text-align: center;
+}
+
+.reactifypress-reaction-icon {
+    width: 40px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.reactifypress-reaction-controls {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.reactifypress-reaction-field {
+    flex-grow: 1;
+}
+
+.reactifypress-reaction-active-wrapper {
+    margin-right: 15px;
+}
+
+.reactifypress-reaction-delete {
+    color: #b32d2e;
+    text-decoration: none;
+}
+
+.reactifypress-reaction-delete:hover {
+    color: #dc3232;
+}
+
+/* Buttons */
+.reactifypress-add-reaction {
+    margin: 15px 0;
+}
+
+.reactifypress-reset-settings {
+    color: #b32d2e;
+    margin-left: 10px;
+}
+
+/* Preview */
+.reactifypress-preview-container {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+/* Color picker */
+.wp-picker-container {
+    display: inline-block;
+}
+
+/* Analytics page */
+.reactifypress-analytics-container {
+    margin-top: 20px;
+}
+
+.reactifypress-analytics-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.reactifypress-analytics-title {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.reactifypress-analytics-chart {
+    height: 300px;
+    margin: 20px 0;
+}
+
+.reactifypress-analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reactifypress-analytics-table th,
+.reactifypress-analytics-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.reactifypress-analytics-table th {
+    font-weight: 600;
+    background: #f5f5f5;
+}
+
+/* Template for reactions (hidden) */
+#reactifypress-reaction-template {
+    display: none;
+}
