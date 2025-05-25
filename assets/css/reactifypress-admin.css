@@ -4,7 +4,7 @@
 
 /* General styles */
 .reactifypress-settings-page {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 20px 0;
     background: #fff;
     padding: 20px;
@@ -20,6 +20,30 @@
 
 .reactifypress-settings-page .notice {
     margin: 15px 0;
+}
+
+/* Version badge */
+.reactifypress-version {
+    font-size: 12px;
+    color: #666;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+/* Section headers */
+.reactifypress-section-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.reactifypress-section-header h2 {
+    margin-bottom: 10px;
+}
+
+.reactifypress-section-header p {
+    color: #666;
+    font-size: 14px;
 }
 
 /* Tabs */
@@ -43,6 +67,7 @@
     border: 1px solid #ddd;
     border-bottom: none;
     background: #f5f5f5;
+    list-style: none;
 }
 
 .reactifypress-tabs .ui-tabs-nav li.ui-tabs-active {
@@ -57,6 +82,11 @@
     text-decoration: none;
     color: #444;
     font-weight: 500;
+}
+
+.reactifypress-tabs .ui-tabs-nav li a .dashicons {
+    margin-right: 5px;
+    vertical-align: middle;
 }
 
 .reactifypress-tabs .ui-tabs-panel {
@@ -98,6 +128,15 @@
     margin-top: 5px;
 }
 
+/* Toolbar */
+.reactifypress-reactions-toolbar {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 /* Reactions list */
 .reactifypress-reactions-list {
     margin: 20px 0;
@@ -109,20 +148,29 @@
     align-items: center;
     padding: 15px;
     margin-bottom: 10px;
-    background: #f9f9f9;
+    background: #fff;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 5px;
     transition: all 0.2s ease;
+    gap: 15px;
+}
+
+.reactifypress-reaction-item:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.reactifypress-reaction-item.ui-sortable-helper {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .reactifypress-reaction-item.reactifypress-reaction-inactive {
     opacity: 0.6;
+    background: #f9f9f9;
 }
 
 .reactifypress-reaction-handle {
     cursor: move;
     padding: 5px;
-    margin-right: 10px;
     color: #999;
 }
 
@@ -131,39 +179,98 @@
 }
 
 .reactifypress-reaction-icon-wrapper {
-    margin-right: 15px;
-    width: 40px;
-    text-align: center;
+    position: relative;
+    width: 80px;
 }
 
 .reactifypress-reaction-icon {
-    width: 40px;
-    text-align: center;
+    width: 100%;
+    padding-right: 40px;
     font-size: 16px;
 }
 
+.reactifypress-icon-preview {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    pointer-events: none;
+}
+
 .reactifypress-reaction-controls {
-    flex-grow: 1;
+    flex: 1;
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
 .reactifypress-reaction-field {
-    flex-grow: 1;
+    flex: 1;
 }
 
 .reactifypress-reaction-active-wrapper {
     margin-right: 15px;
 }
 
-.reactifypress-reaction-delete {
+/* Delete button */
+.reactifypress-delete-reaction {
+    background: none;
+    border: none;
     color: #b32d2e;
-    text-decoration: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s;
 }
 
-.reactifypress-reaction-delete:hover {
+.reactifypress-delete-reaction:hover {
     color: #dc3232;
+}
+
+/* Switch styles */
+.reactifypress-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.reactifypress-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.reactifypress-switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .3s;
+    border-radius: 24px;
+}
+
+.reactifypress-switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+.reactifypress-switch input:checked+.reactifypress-switch-slider {
+    background-color: #2271b1;
+}
+
+.reactifypress-switch input:checked+.reactifypress-switch-slider:before {
+    transform: translateX(20px);
 }
 
 /* Buttons */
@@ -183,9 +290,118 @@
     border-radius: 4px;
 }
 
+/* Live preview */
+.reactifypress-appearance-preview {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+#reactifypress-live-preview {
+    background: #fff;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Preset buttons */
+.reactifypress-presets {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.reactifypress-preset {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reactifypress-preset-preview {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid #ddd;
+}
+
 /* Color picker */
 .wp-picker-container {
     display: inline-block;
+}
+
+/* Modal styles */
+.reactifypress-modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reactifypress-modal-content {
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.reactifypress-modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reactifypress-modal-header h3 {
+    margin: 0;
+}
+
+.reactifypress-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.reactifypress-modal-body {
+    padding: 20px;
+}
+
+.reactifypress-emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.reactifypress-emoji-button {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.reactifypress-emoji-button:hover {
+    background: #e5e5e5;
+    transform: scale(1.1);
 }
 
 /* Analytics page */
@@ -229,7 +445,75 @@
     background: #f5f5f5;
 }
 
+/* Help text */
+.reactifypress-reactions-help {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f0f8ff;
+    border-left: 4px solid #2271b1;
+    border-radius: 3px;
+}
+
+.reactifypress-reactions-help .dashicons {
+    color: #2271b1;
+    margin-right: 5px;
+}
+
+/* Import/Export section */
+.reactifypress-import-export {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.reactifypress-import-export h3 {
+    margin-top: 0;
+}
+
+.reactifypress-export,
+.reactifypress-import {
+    margin: 20px 0;
+}
+
+/* Submit wrapper */
+.reactifypress-submit-wrapper {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Sortable placeholder */
+.reactifypress-sortable-placeholder {
+    background: #f1f1f1;
+    border: 2px dashed #999;
+    visibility: visible !important;
+    height: 68px !important;
+}
+
 /* Template for reactions (hidden) */
 #reactifypress-reaction-template {
     display: none;
+}
+
+/* Responsive improvements */
+@media (max-width: 782px) {
+    .reactifypress-reactions-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .reactifypress-reaction-item {
+        flex-wrap: wrap;
+    }
+
+    .reactifypress-reaction-controls {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .reactifypress-form-table th,
+    .reactifypress-form-table td {
+        display: block;
+        width: 100%;
+    }
 }

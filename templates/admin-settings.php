@@ -643,3 +643,170 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
     /* Modal styles */
     .reactifypress-modal {
         position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .reactifypress-modal-content {
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .reactifypress-modal-header {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .reactifypress-modal-header h3 {
+        margin: 0;
+    }
+
+    .reactifypress-modal-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+    }
+
+    .reactifypress-modal-body {
+        padding: 20px;
+    }
+
+    .reactifypress-emoji-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .reactifypress-emoji-button {
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .reactifypress-emoji-button:hover {
+        background: #e5e5e5;
+        transform: scale(1.1);
+    }
+
+    /* Import/Export section */
+    .reactifypress-import-export {
+        margin-top: 40px;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 5px;
+    }
+
+    .reactifypress-import-export h3 {
+        margin-top: 0;
+    }
+
+    .reactifypress-export,
+    .reactifypress-import {
+        margin: 20px 0;
+    }
+
+    /* Submit wrapper */
+    .reactifypress-submit-wrapper {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+    }
+
+    /* Help text */
+    .reactifypress-reactions-help {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f0f8ff;
+        border-left: 4px solid #2271b1;
+        border-radius: 3px;
+    }
+
+    .reactifypress-reactions-help .dashicons {
+        color: #2271b1;
+        margin-right: 5px;
+    }
+
+    /* Improved reaction item styles */
+    .reactifypress-reaction-item {
+        background: #fff;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.2s;
+    }
+
+    .reactifypress-reaction-item:hover {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .reactifypress-reaction-item.ui-sortable-helper {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .reactifypress-reaction-handle {
+        cursor: move;
+        color: #999;
+    }
+
+    .reactifypress-reaction-controls {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .reactifypress-reaction-field {
+        flex: 1;
+    }
+
+    /* Inactive reaction styles */
+    .reactifypress-reaction-inactive {
+        opacity: 0.6;
+        background: #f9f9f9;
+    }
+
+    /* Responsive improvements */
+    @media (max-width: 782px) {
+        .reactifypress-reactions-toolbar {
+            flex-wrap: wrap;
+        }
+
+        .reactifypress-reaction-item {
+            flex-wrap: wrap;
+        }
+
+        .reactifypress-reaction-controls {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+</style>

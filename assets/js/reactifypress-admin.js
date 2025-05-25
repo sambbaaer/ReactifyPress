@@ -439,22 +439,80 @@
                     var settings = JSON.parse(e.target.result);
 
                     // Confirm import
-                    if (confirm('This will replace all current settings. Continue?')) {
-                        // Import settings logic would go here
-                        // For now, just show success message
-                        alert('Settings imported successfully! Please save to apply changes.');
+                    if (confirm(reactifypress_admin.i18n.confirm_import)) {
+                        // Populate form with imported settings
+                        ReactifyPressAdmin.importSettings(settings);
+                        alert(reactifypress_admin.i18n.import_success);
                     }
                 } catch (error) {
-                    alert('Invalid settings file.');
+                    alert(reactifypress_admin.i18n.import_error);
                 }
             };
             reader.readAsText(file);
         },
 
         /**
+         * Import settings into the form
+         */
+        importSettings: function (settings) {
+            // Import reactions
+            if (settings.reactifypress_settings && settings.reactifypress_settings.reactions) {
+                // Clear existing reactions
+                $('#reactifypress-reactions-list').empty();
+
+                // Add imported reactions
+                var index = 0;
+                $.each(settings.reactifypress_settings.reactions, function (key, reaction) {
+                    var $template = $('#reactifypress-reaction-template').html();
+                    $template = $template.replace(/\{index\}/g, index);
+
+                    var $item = $($template);
+                    $item.find('.reactifypress-reaction-icon').val(reaction.icon);
+                    $item.find('.reactifypress-icon-preview').text(reaction.icon);
+                    $item.find('.reactifypress-reaction-label').val(reaction.label);
+
+                    if (!reaction.active) {
+                        $item.find('.reactifypress-reaction-active').prop('checked', false);
+                        $item.addClass('reactifypress-reaction-inactive');
+                    }
+
+                    $('#reactifypress-reactions-list').append($item);
+                    index++;
+                });
+            }
+
+            // Import display settings
+            if (settings.reactifypress_settings && settings.reactifypress_settings.display) {
+                var display = settings.reactifypress_settings.display;
+
+                // Update color pickers
+                if (display.background_color) $('#reactifypress-background-color').wpColorPicker('color', display.background_color);
+                if (display.text_color) $('#reactifypress-text-color').wpColorPicker('color', display.text_color);
+                if (display.hover_color) $('#reactifypress-hover-color').wpColorPicker('color', display.hover_color);
+                if (display.active_color) $('#reactifypress-active-color').wpColorPicker('color', display.active_color);
+                if (display.tooltip_background) $('#reactifypress-tooltip-background').wpColorPicker('color', display.tooltip_background);
+                if (display.tooltip_text_color) $('#reactifypress-tooltip-text-color').wpColorPicker('color', display.tooltip_text_color);
+
+                // Update other display settings
+                if (display.position) $('#reactifypress-display-position').val(display.position);
+                if (display.alignment) $('#reactifypress-alignment').val(display.alignment);
+
+                $('input[name="reactifypress_settings[display][display_count]"]').prop('checked', display.display_count);
+                $('input[name="reactifypress_settings[display][display_labels]"]').prop('checked', display.display_labels);
+                $('input[name="reactifypress_settings[display][show_total]"]').prop('checked', display.show_total);
+                $('input[name="reactifypress_settings[display][animate]"]').prop('checked', display.animate);
+            }
+
+            // Update live preview
+            this.updateLivePreview();
+        },
+
+        /**
          * Initialize emoji modal
          */
         initEmojiModal: function () {
+            var self = this;
+
             // Modal close button
             $('.reactifypress-modal-close').on('click', function () {
                 $(this).closest('.reactifypress-modal').fadeOut();
@@ -470,16 +528,16 @@
             // Emoji button click
             $('.reactifypress-emoji-button').on('click', function () {
                 var emoji = $(this).data('emoji');
+                var $button = $(this);
 
                 // Copy to clipboard
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(emoji).then(function () {
                         // Show success feedback
-                        var $button = $(this);
-                        $button.addClass('copied');
+                        $button.css('background', '#2ecc71');
                         setTimeout(function () {
-                            $button.removeClass('copied');
-                        }, 1000);
+                            $button.css('background', '');
+                        }, 300);
                     });
                 } else {
                     // Fallback for older browsers
@@ -488,13 +546,13 @@
                     $temp.val(emoji).select();
                     document.execCommand('copy');
                     $temp.remove();
-                }
 
-                // Flash the button
-                $(this).css('background', '#2ecc71');
-                setTimeout(function () {
-                    $(this).css('background', '');
-                }.bind(this), 300);
+                    // Show success feedback
+                    $button.css('background', '#2ecc71');
+                    setTimeout(function () {
+                        $button.css('background', '');
+                    }, 300);
+                }
             });
         },
 

@@ -192,6 +192,8 @@
     z-index: 1000;
     pointer-events: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--reactifypress-tooltip-bg);
+    color: var(--reactifypress-tooltip-text);
 }
 
 .reactifypress-tooltip:after {
