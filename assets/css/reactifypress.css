@@ -2,73 +2,196 @@
  * ReactifyPress Frontend Styles
  */
 
+/* CSS Variables for easy theming */
+:root {
+    --reactifypress-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --reactifypress-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --reactifypress-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --reactifypress-radius: 24px;
+    --reactifypress-gap: 12px;
+}
+
 /* Container */
 .reactifypress-container {
-    margin: 20px 0;
-    padding: 10px 0;
+    margin: 30px 0;
+    padding: 0;
     clear: both;
+    position: relative;
+    animation: reactifypress-fade-in 0.3s ease-out;
+}
+
+@keyframes reactifypress-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header with total count */
+.reactifypress-header {
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 14px;
+}
+
+.reactifypress-total strong {
+    color: #333;
+    font-weight: 600;
 }
 
 /* Reactions wrapper */
 .reactifypress-reactions {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: var(--reactifypress-gap);
     justify-content: flex-start;
-}
-
-/* Individual reaction */
-.reactifypress-reaction {
-    display: flex;
     align-items: center;
-    border-radius: 20px;
-    padding: 6px 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
 }
 
+/* Individual reaction button */
+.reactifypress-reaction {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: var(--reactifypress-radius);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: var(--reactifypress-transition);
+    position: relative;
+    box-shadow: var(--reactifypress-shadow);
+    font-size: 14px;
+    font-weight: 500;
+    border: 2px solid transparent;
+    outline: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+    /* Accessibility: minimum touch target */
+}
+
+/* Hover and focus states */
 .reactifypress-reaction:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--reactifypress-shadow-hover);
+}
+
+.reactifypress-reaction:focus {
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.reactifypress-reaction:focus:not(:focus-visible) {
+    box-shadow: var(--reactifypress-shadow);
+}
+
+/* Active state */
+.reactifypress-reaction.reactifypress-active {
+    border-color: var(--reactifypress-active);
+    transform: scale(1.05);
+}
+
+.reactifypress-reaction.reactifypress-active:hover {
+    transform: scale(1.08) translateY(-2px);
+}
+
+/* Has reactions state */
+.reactifypress-reaction.reactifypress-has-reactions {
+    font-weight: 600;
+}
+
+/* Touch state */
+.reactifypress-reaction.reactifypress-touch {
+    transform: scale(0.95);
+}
+
+/* Processing state */
+.reactifypress-processing .reactifypress-reaction {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Animation states */
+.reactifypress-reaction.reactifypress-animating {
+    animation: reactifypress-pulse 0.3s ease-out;
+}
+
+.reactifypress-reaction.reactifypress-success {
+    animation: reactifypress-success 0.5s ease-out;
+}
+
+@keyframes reactifypress-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes reactifypress-success {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Icon */
 .reactifypress-icon {
-    font-size: 18px;
-    margin-right: 6px;
+    font-size: 20px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.reactifypress-reaction:hover .reactifypress-icon {
+    transform: scale(1.1);
 }
 
 /* Count */
 .reactifypress-count {
-    font-weight: bold;
+    font-weight: 600;
     min-width: 20px;
     text-align: center;
+    transition: var(--reactifypress-transition);
 }
 
 /* Label */
 .reactifypress-label {
-    margin-left: 5px;
+    margin-left: 2px;
+    opacity: 0.9;
 }
 
 /* Tooltip */
 .reactifypress-tooltip {
     position: absolute;
-    bottom: 100%;
+    bottom: calc(100% + 10px);
     left: 50%;
-    transform: translateX(-50%);
-    padding: 5px 10px;
-    border-radius: 4px;
+    transform: translateX(-50%) scale(0.8);
+    padding: 6px 12px;
+    border-radius: 6px;
     font-size: 12px;
+    font-weight: 500;
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 100;
-    margin-bottom: 5px;
+    transition: all 0.2s ease;
+    z-index: 1000;
     pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .reactifypress-tooltip:after {
@@ -76,39 +199,177 @@
     position: absolute;
     top: 100%;
     left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
+    margin-left: -6px;
+    border-width: 6px;
     border-style: solid;
-    border-color: #333 transparent transparent transparent;
+    border-color: var(--reactifypress-tooltip-bg) transparent transparent transparent;
 }
 
 /* Show tooltip on hover */
-.reactifypress-reaction:hover .reactifypress-tooltip {
+.reactifypress-reaction:hover .reactifypress-tooltip,
+.reactifypress-reaction:focus .reactifypress-tooltip {
     opacity: 1;
     visibility: visible;
+    transform: translateX(-50%) scale(1);
 }
 
-/* Processing state */
-.reactifypress-processing {
+/* Loading indicator */
+.reactifypress-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 10;
+}
+
+.reactifypress-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--reactifypress-active);
+    animation: reactifypress-spin 0.8s linear infinite;
+}
+
+@keyframes reactifypress-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Toast notifications */
+.reactifypress-toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    background: #333;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    max-width: 320px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.reactifypress-toast-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reactifypress-toast-error {
+    background: #e53e3e;
+}
+
+.reactifypress-toast-success {
+    background: #48bb78;
+}
+
+/* Auto-inserted reactions spacing */
+.reactifypress-auto-insert {
+    margin: 30px 0;
+}
+
+/* Elementor preview styles */
+.elementor-widget-reactifypress .reactifypress-container {
+    margin: 0;
+}
+
+.reactifypress-preview-elementor {
+    opacity: 0.9;
+}
+
+.reactifypress-preview .reactifypress-reaction {
     pointer-events: none;
-    opacity: 0.7;
 }
 
 /* Responsive styles */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
+    .reactifypress-container {
+        margin: 20px 0;
+    }
+
     .reactifypress-reactions {
-        justify-content: center;
+        gap: 8px;
     }
-    
+
     .reactifypress-reaction {
-        padding: 5px 10px;
+        padding: 6px 12px;
+        font-size: 13px;
+        min-height: 40px;
     }
-    
+
     .reactifypress-icon {
-        font-size: 16px;
+        font-size: 18px;
     }
-    
+
     .reactifypress-count {
-        font-size: 12px;
+        font-size: 13px;
+    }
+
+    .reactifypress-toast {
+        left: 20px;
+        right: 20px;
+        bottom: 60px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .reactifypress-header {
+        color: #ccc;
+    }
+
+    .reactifypress-total strong {
+        color: #fff;
+    }
+
+    .reactifypress-toast {
+        background: #1a1a1a;
+        color: #fff;
+    }
+}
+
+/* Print styles */
+@media print {
+    .reactifypress-container {
+        display: none;
+    }
+}
+
+/* Accessibility improvements */
+.reactifypress-reaction:focus-visible {
+    outline: 2px solid var(--reactifypress-active);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .reactifypress-reaction {
+        border: 2px solid currentColor;
+    }
+
+    .reactifypress-reaction:hover,
+    .reactifypress-reaction:focus {
+        outline: 3px solid currentColor;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    .reactifypress-container,
+    .reactifypress-reaction,
+    .reactifypress-tooltip,
+    .reactifypress-toast {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
