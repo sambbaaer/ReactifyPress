@@ -3,7 +3,7 @@
  * Plugin Name: ReactifyPress
  * Plugin URI: https://samuelbaer.ch/reactifypress
  * Description: Ermöglicht Besuchern, auf Beiträge mit verschiedenen Emoticons zu reagieren, ähnlich wie bei sozialen Netzwerken.
- * Version: 2.0.3
+ * Version: 2.1.3
  * Requires at least: 5.6
  * Requires PHP: 7.4
  * Author: sambbaer
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('REACTIFYPRESS_VERSION', '2.0.3');
+define('REACTIFYPRESS_VERSION', '2.1.3');
 define('REACTIFYPRESS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('REACTIFYPRESS_PLUGIN_URL', plugin_dir_url(__FILE__));
 

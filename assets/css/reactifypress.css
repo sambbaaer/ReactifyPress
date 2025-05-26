@@ -175,13 +175,13 @@
     opacity: 0.9;
 }
 
-/* Tooltip */
+/* Haupttooltip-Container */
 .reactifypress-tooltip {
     position: absolute;
     bottom: calc(100% + 10px);
     left: 50%;
-    transform: translateX(-50%) scale(0.8);
-    padding: 6px 12px;
+    transform: translateX(-50%);
+    padding: 8px 12px;
     border-radius: 6px;
     font-size: 12px;
     font-weight: 500;
@@ -192,27 +192,101 @@
     z-index: 1000;
     pointer-events: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    background-color: var(--reactifypress-tooltip-bg);
-    color: var(--reactifypress-tooltip-text);
+    background-color: var(--reactifypress-tooltip-bg, #333333);
+    color: var(--reactifypress-tooltip-text, #ffffff);
+
+    /* Wichtig: Verhindert, dass der Tooltip abgeschnitten wird */
+    max-width: 200px;
+    word-wrap: break-word;
 }
 
-.reactifypress-tooltip:after {
+/* Tooltip-Pfeil - Das ist der wichtige Fix! */
+.reactifypress-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    /* Positioniert den Pfeil am unteren Rand des Tooltips */
+    left: 50%;
+    margin-left: -6px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--reactifypress-tooltip-bg, #333333);
+    /* Nicht border-color verwenden, sondern spezifische border-top */
+}
+
+/* Alternative Pfeil-Implementierung falls die erste nicht funktioniert */
+.reactifypress-tooltip::before {
     content: '';
     position: absolute;
     top: 100%;
     left: 50%;
-    margin-left: -6px;
-    border-width: 6px;
-    border-style: solid;
-    border-color: var(--reactifypress-tooltip-bg) transparent transparent transparent;
+    margin-left: -7px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid rgba(0, 0, 0, 0.1);
+    z-index: -1;
 }
 
-/* Show tooltip on hover */
+/* Tooltip anzeigen bei Hover und Focus */
 .reactifypress-reaction:hover .reactifypress-tooltip,
 .reactifypress-reaction:focus .reactifypress-tooltip {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) scale(1);
+    transform: translateX(-50%) translateY(-5px);
+}
+
+/* Zusätzliche Verbesserungen für bessere Darstellung */
+.reactifypress-reaction {
+    position: relative;
+    /* Wichtig für absolute Positionierung des Tooltips */
+    overflow: visible;
+    /* Stellt sicher, dass der Tooltip nicht abgeschnitten wird */
+}
+
+/* Responsive Anpassungen für mobile Geräte */
+@media screen and (max-width: 640px) {
+    .reactifypress-tooltip {
+        font-size: 11px;
+        padding: 6px 10px;
+        max-width: 150px;
+    }
+
+    .reactifypress-tooltip::after {
+        border-left-width: 5px;
+        border-right-width: 5px;
+        border-top-width: 5px;
+        margin-left: -5px;
+    }
+
+    .reactifypress-tooltip::before {
+        border-left-width: 6px;
+        border-right-width: 6px;
+        border-top-width: 6px;
+        margin-left: -6px;
+    }
+}
+
+/* Fix für Hochkontrast-Modus */
+@media (prefers-contrast: high) {
+    .reactifypress-tooltip {
+        border: 2px solid currentColor;
+    }
+
+    .reactifypress-tooltip::after {
+        border-top-color: currentColor;
+    }
+}
+
+/* Dark Mode Unterstützung */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --reactifypress-tooltip-bg: #1a1a1a;
+        --reactifypress-tooltip-text: #ffffff;
+    }
 }
 
 /* Loading indicator */
