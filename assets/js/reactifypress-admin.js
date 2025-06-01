@@ -56,9 +56,6 @@
             // Initialize event handlers
             this.initEventHandlers();
 
-            // Initialize live preview
-            this.initLivePreview();
-
             // Initialize emoji modal
             this.initEmojiModal();
         },
@@ -82,11 +79,10 @@
         initColorPickers: function () {
             $('.reactifypress-color-picker').wpColorPicker({
                 change: function (event, ui) {
-                    // Update live preview when color changes
-                    ReactifyPressAdmin.updateLivePreview();
+                    // Color picker change handler
                 },
                 clear: function () {
-                    ReactifyPressAdmin.updateLivePreview();
+                    // Color picker clear handler
                 }
             });
         },
@@ -103,7 +99,6 @@
                 update: function () {
                     // Re-index reactions when order changes
                     ReactifyPressAdmin.reindexReactions();
-                    ReactifyPressAdmin.updateLivePreview();
                 }
             });
         },
@@ -124,14 +119,8 @@
             // Toggle reaction active state
             $(document).on('change', '.reactifypress-reaction-active', this.handleToggleReactionActive);
 
-            // Preview reactions
-            $('#reactifypress-preview-reactions').on('click', this.handlePreviewReactions);
-
             // Icon input change
             $(document).on('input', '.reactifypress-reaction-icon', this.handleIconChange);
-
-            // Label input change
-            $(document).on('input', '.reactifypress-reaction-label', this.updateLivePreview);
 
             // Color presets
             $('.reactifypress-preset').on('click', this.handlePresetClick);
@@ -146,9 +135,6 @@
             // Emoji picker
             $('#reactifypress-emoji-picker').on('click', this.showEmojiModal);
 
-            // Display option changes
-            $('input[name*="[display]"]').on('change', this.updateLivePreview);
-
             // Prevent form submission on enter in reaction fields
             $('.reactifypress-reaction-item input').on('keypress', function (e) {
                 if (e.which === 13) {
@@ -159,80 +145,52 @@
         },
 
         /**
-         * Initialize live preview
+         * Initialize emoji modal
          */
-        initLivePreview: function () {
-            this.updateLivePreview();
-        },
+        initEmojiModal: function () {
+            var self = this;
 
-        /**
-         * Update live preview
-         */
-        updateLivePreview: function () {
-            var reactions = [];
-            var displaySettings = {};
+            // Modal close button
+            $('.reactifypress-modal-close').on('click', function () {
+                $(this).closest('.reactifypress-modal').fadeOut();
+            });
 
-            // Get active reactions
-            $('.reactifypress-reaction-item').each(function () {
-                var $item = $(this);
-                var isActive = $item.find('.reactifypress-reaction-active').is(':checked');
+            // Close on background click
+            $('.reactifypress-modal').on('click', function (e) {
+                if (e.target === this) {
+                    $(this).fadeOut();
+                }
+            });
 
-                if (isActive) {
-                    reactions.push({
-                        icon: $item.find('.reactifypress-reaction-icon').val(),
-                        label: $item.find('.reactifypress-reaction-label').val()
+            // Emoji button click
+            $('.reactifypress-emoji-button').on('click', function () {
+                var emoji = $(this).data('emoji');
+                var $button = $(this);
+
+                // Copy to clipboard
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(emoji).then(function () {
+                        // Show success feedback
+                        $button.css('background', '#2ecc71');
+                        setTimeout(function () {
+                            $button.css('background', '');
+                        }, 300);
                     });
+                } else {
+                    // Fallback for older browsers
+                    var $temp = $('<input>');
+                    $('body').append($temp);
+                    $temp.val(emoji).select();
+                    document.execCommand('copy');
+                    $temp.remove();
+
+                    // Show success feedback
+                    $button.css('background', '#2ecc71');
+                    setTimeout(function () {
+                        $button.css('background', '');
+                    }, 300);
                 }
             });
-
-            // Get display settings
-            displaySettings.background_color = $('#reactifypress-background-color').val();
-            displaySettings.text_color = $('#reactifypress-text-color').val();
-            displaySettings.hover_color = $('#reactifypress-hover-color').val();
-            displaySettings.active_color = $('#reactifypress-active-color').val();
-            displaySettings.display_count = $('input[name*="[display_count]"]').is(':checked');
-            displaySettings.display_labels = $('input[name*="[display_labels]"]').is(':checked');
-
-            // Create preview HTML
-            var previewHtml = '<div class="reactifypress-container">';
-            previewHtml += '<div class="reactifypress-reactions">';
-
-            var sampleCounts = [42, 18, 7, 3, 1, 0];
-            reactions.forEach(function (reaction, index) {
-                var count = sampleCounts[index] || 0;
-                var activeClass = index === 0 ? 'reactifypress-active' : '';
-
-                previewHtml += '<div class="reactifypress-reaction ' + activeClass + '">';
-                previewHtml += '<div class="reactifypress-icon">' + reaction.icon + '</div>';
-
-                if (displaySettings.display_count) {
-                    previewHtml += '<span class="reactifypress-count">' + count + '</span>';
-                }
-
-                if (displaySettings.display_labels) {
-                    previewHtml += '<span class="reactifypress-label">' + reaction.label + '</span>';
-                }
-
-                previewHtml += '</div>';
-            });
-
-            previewHtml += '</div></div>';
-
-            // Add styles
-            previewHtml += '<style>';
-            previewHtml += '#reactifypress-live-preview .reactifypress-reaction {';
-            previewHtml += 'background-color: ' + displaySettings.background_color + ';';
-            previewHtml += 'color: ' + displaySettings.text_color + ';';
-            previewHtml += '}';
-            previewHtml += '#reactifypress-live-preview .reactifypress-reaction:hover {';
-            previewHtml += 'background-color: ' + displaySettings.hover_color + ';';
-            previewHtml += '}';
-            previewHtml += '#reactifypress-live-preview .reactifypress-reaction.reactifypress-active {';
-            previewHtml += 'background-color: ' + displaySettings.active_color + ';';
-            previewHtml += '}';
-            previewHtml += '</style>';
-
-            $('#reactifypress-live-preview').html(previewHtml);
         },
 
         /**
@@ -256,9 +214,6 @@
             // Focus on the new icon input
             $newItem.find('.reactifypress-reaction-icon').focus();
 
-            // Update live preview
-            ReactifyPressAdmin.updateLivePreview();
-
             return false;
         },
 
@@ -276,7 +231,6 @@
 
                     // Re-index reactions
                     ReactifyPressAdmin.reindexReactions();
-                    ReactifyPressAdmin.updateLivePreview();
                 });
             }
 
@@ -316,8 +270,6 @@
             } else {
                 $item.addClass('reactifypress-reaction-inactive');
             }
-
-            ReactifyPressAdmin.updateLivePreview();
         },
 
         /**
@@ -328,31 +280,6 @@
             var $preview = $input.siblings('.reactifypress-icon-preview');
 
             $preview.text($input.val());
-            ReactifyPressAdmin.updateLivePreview();
-        },
-
-        /**
-         * Handle preview reactions
-         */
-        handlePreviewReactions: function (e) {
-            e.preventDefault();
-
-            // Open preview in a modal
-            var $preview = $('#reactifypress-live-preview').clone();
-
-            $('<div class="reactifypress-preview-modal">')
-                .append($preview)
-                .dialog({
-                    title: reactifypress_admin.i18n.preview_title || 'Preview Reactions',
-                    modal: true,
-                    width: 600,
-                    height: 400,
-                    close: function () {
-                        $(this).dialog('destroy').remove();
-                    }
-                });
-
-            return false;
         },
 
         /**
@@ -372,9 +299,6 @@
                         $input.wpColorPicker('color', value);
                     }
                 });
-
-                // Update live preview
-                ReactifyPressAdmin.updateLivePreview();
             }
         },
 
@@ -502,58 +426,6 @@
                 $('input[name="reactifypress_settings[display][show_total]"]').prop('checked', display.show_total);
                 $('input[name="reactifypress_settings[display][animate]"]').prop('checked', display.animate);
             }
-
-            // Update live preview
-            this.updateLivePreview();
-        },
-
-        /**
-         * Initialize emoji modal
-         */
-        initEmojiModal: function () {
-            var self = this;
-
-            // Modal close button
-            $('.reactifypress-modal-close').on('click', function () {
-                $(this).closest('.reactifypress-modal').fadeOut();
-            });
-
-            // Close on background click
-            $('.reactifypress-modal').on('click', function (e) {
-                if (e.target === this) {
-                    $(this).fadeOut();
-                }
-            });
-
-            // Emoji button click
-            $('.reactifypress-emoji-button').on('click', function () {
-                var emoji = $(this).data('emoji');
-                var $button = $(this);
-
-                // Copy to clipboard
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(emoji).then(function () {
-                        // Show success feedback
-                        $button.css('background', '#2ecc71');
-                        setTimeout(function () {
-                            $button.css('background', '');
-                        }, 300);
-                    });
-                } else {
-                    // Fallback for older browsers
-                    var $temp = $('<input>');
-                    $('body').append($temp);
-                    $temp.val(emoji).select();
-                    document.execCommand('copy');
-                    $temp.remove();
-
-                    // Show success feedback
-                    $button.css('background', '#2ecc71');
-                    setTimeout(function () {
-                        $button.css('background', '');
-                    }, 300);
-                }
-            });
         },
 
         /**

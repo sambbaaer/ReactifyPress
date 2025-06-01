@@ -35,7 +35,7 @@ class ReactifyPress_Settings {
             ),
             'love' => array(
                 'icon' => '❤️',
-                'label' => 'Love',
+                'label' => 'Liebe ich',
                 'active' => true,
             ),
             'haha' => array(
@@ -50,12 +50,12 @@ class ReactifyPress_Settings {
             ),
             'sad' => array(
                 'icon' => '😢',
-                'label' => 'Sad',
+                'label' => 'Oh man',
                 'active' => true,
             ),
             'angry' => array(
                 'icon' => '😡',
-                'label' => 'Angry',
+                'label' => 'macht mich wütend',
                 'active' => true,
             ),
         ),

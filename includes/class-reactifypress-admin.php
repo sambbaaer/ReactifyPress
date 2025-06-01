@@ -53,8 +53,8 @@ class ReactifyPress_Admin
 
         add_submenu_page(
             'reactifypress',
-            __('Settings', 'reactifypress'),
-            __('Settings', 'reactifypress'),
+            __('Einstellungen', 'reactifypress'),
+            __('Einstellungen', 'reactifypress'),
             'manage_options',
             'reactifypress',
             array($this, 'render_settings_page')
@@ -62,8 +62,8 @@ class ReactifyPress_Admin
 
         add_submenu_page(
             'reactifypress',
-            __('Analytics', 'reactifypress'),
-            __('Analytics', 'reactifypress'),
+            __('Auswertung', 'reactifypress'),
+            __('Auswertung', 'reactifypress'),
             'manage_options',
             'reactifypress-analytics',
             array($this, 'render_analytics_page')

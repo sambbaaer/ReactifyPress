@@ -54,8 +54,8 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
             <!-- Reactions Tab -->
             <div id="tab-reactions">
                 <div class="reactifypress-section-header">
-                    <h2><?php esc_html_e('Manage Reactions', 'reactifypress'); ?></h2>
-                    <p><?php esc_html_e('Configure the reactions that will be available on your posts. Drag to reorder.', 'reactifypress'); ?></p>
+                    <h2><?php esc_html_e('Reaktionen verwalten', 'reactifypress'); ?></h2>
+                    <p><?php esc_html_e('Konfigurieren Sie die Reaktionen, die für Ihre Beiträge verfügbar sein sollen. Ziehen Sie sie, um die Reihenfolge zu ändern.', 'reactifypress'); ?></p>
                 </div>
 
                 <div class="reactifypress-reactions-toolbar">
@@ -64,15 +64,10 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                         <?php esc_html_e('Neue Reaktion hinzufügen', 'reactifypress'); ?>
                     </button>
 
-                    <button type="button" id="reactifypress-preview-reactions" class="button">
-                        <span class="dashicons dashicons-visibility"></span>
-                        <?php esc_html_e('Vorschau', 'reactifypress'); ?>
-                    </button>
-
                     <div class="reactifypress-emoji-picker-wrapper">
                         <button type="button" id="reactifypress-emoji-picker" class="button">
                             <span class="dashicons dashicons-editor-help"></span>
-                            <?php esc_html_e('Emoji Reference', 'reactifypress'); ?>
+                            <?php esc_html_e('Emoji-Referenz', 'reactifypress'); ?>
                         </button>
                     </div>
                 </div>
@@ -84,7 +79,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                         $inactive_class = !$reaction['active'] ? 'reactifypress-reaction-inactive' : '';
                     ?>
                         <div class="reactifypress-reaction-item <?php echo esc_attr($inactive_class); ?>" data-index="<?php echo esc_attr($i); ?>">
-                            <div class="reactifypress-reaction-handle" title="<?php esc_attr_e('Drag to reorder', 'reactifypress'); ?>">
+                            <div class="reactifypress-reaction-handle" title="<?php esc_attr_e('Ziehen zum Umordnen', 'reactifypress'); ?>">
                                 <span class="dashicons dashicons-menu"></span>
                             </div>
 
@@ -104,7 +99,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                                         name="reactifypress_settings[reactions][<?php echo esc_attr($i); ?>][label]"
                                         value="<?php echo esc_attr($reaction['label']); ?>"
                                         class="reactifypress-reaction-label regular-text"
-                                        placeholder="<?php esc_attr_e('Reaction Name', 'reactifypress'); ?>"
+                                        placeholder="<?php esc_attr_e('Reaktionsname', 'reactifypress'); ?>"
                                         required>
                                 </div>
 
@@ -116,11 +111,11 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                                             class="reactifypress-reaction-active"
                                             <?php checked($reaction['active'], true); ?>>
                                         <span class="reactifypress-switch-slider"></span>
-                                        <span class="screen-reader-text"><?php esc_html_e('Active', 'reactifypress'); ?></span>
+                                        <span class="screen-reader-text"><?php esc_html_e('Aktiv', 'reactifypress'); ?></span>
                                     </label>
                                 </div>
 
-                                <button type="button" class="reactifypress-delete-reaction" title="<?php esc_attr_e('Delete this reaction', 'reactifypress'); ?>">
+                                <button type="button" class="reactifypress-delete-reaction" title="<?php esc_attr_e('Diese Reaktion löschen', 'reactifypress'); ?>">
                                     <span class="dashicons dashicons-trash"></span>
                                 </button>
                             </div>
@@ -132,20 +127,15 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                 </div>
 
                 <div class="reactifypress-reactions-help">
-                    <p><span class="dashicons dashicons-info"></span> <?php esc_html_e('Tip: Use emojis from your system emoji picker or copy from Emojipedia.', 'reactifypress'); ?></p>
+                    <p><span class="dashicons dashicons-info"></span> <?php esc_html_e('Tipp: Verwenden Sie Emojis aus Ihrer System-Emoji-Auswahl oder kopieren Sie sie von Emojipedia.', 'reactifypress'); ?></p>
                 </div>
             </div>
 
             <!-- Appearance Tab -->
             <div id="tab-appearance">
                 <div class="reactifypress-section-header">
-                    <h2><?php esc_html_e('Appearance Settings', 'reactifypress'); ?></h2>
-                    <p><?php esc_html_e('Customize the colors and visual appearance of your reactions.', 'reactifypress'); ?></p>
-                </div>
-
-                <div class="reactifypress-appearance-preview">
-                    <h3><?php esc_html_e('Live Preview', 'reactifypress'); ?></h3>
-                    <div id="reactifypress-live-preview"></div>
+                    <h2><?php esc_html_e('Aussehen-Einstellungen', 'reactifypress'); ?></h2>
+                    <p><?php esc_html_e('Passen Sie die Farben und das visuelle Erscheinungsbild Ihrer Reaktionen an.', 'reactifypress'); ?></p>
                 </div>
 
                 <table class="form-table reactifypress-form-table">
@@ -155,7 +145,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                         </th>
                         <td>
                             <input type="text" id="reactifypress-background-color" name="reactifypress_settings[display][background_color]" value="<?php echo esc_attr($settings['display']['background_color']); ?>" class="reactifypress-color-picker" data-default-color="#ffffff">
-                            <p class="description"><?php esc_html_e('Default background color for reaction buttons.', 'reactifypress'); ?></p>
+                            <p class="description"><?php esc_html_e('Standard-Hintergrundfarbe für Reaktions-Buttons.', 'reactifypress'); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -164,7 +154,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                         </th>
                         <td>
                             <input type="text" id="reactifypress-text-color" name="reactifypress_settings[display][text_color]" value="<?php echo esc_attr($settings['display']['text_color']); ?>" class="reactifypress-color-picker" data-default-color="#333333">
-                            <p class="description"><?php esc_html_e('Color for reaction counts and labels.', 'reactifypress'); ?></p>
+                            <p class="description"><?php esc_html_e('Farbe für Reaktionszahlen und -bezeichnungen.', 'reactifypress'); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -173,7 +163,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                         </th>
                         <td>
                             <input type="text" id="reactifypress-hover-color" name="reactifypress_settings[display][hover_color]" value="<?php echo esc_attr($settings['display']['hover_color']); ?>" class="reactifypress-color-picker" data-default-color="#e74c3c">
-                            <p class="description"><?php esc_html_e('Background color when hovering over reactions.', 'reactifypress'); ?></p>
+                            <p class="description"><?php esc_html_e('Hintergrundfarbe beim Überfahren mit der Maus über Reaktionen.', 'reactifypress'); ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -182,37 +172,40 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                         </th>
                         <td>
                             <input type="text" id="reactifypress-active-color" name="reactifypress_settings[display][active_color]" value="<?php echo esc_attr($settings['display']['active_color']); ?>" class="reactifypress-color-picker" data-default-color="#f1c40f">
-                            <p class="description"><?php esc_html_e('Background color for selected reactions.', 'reactifypress'); ?></p>
+                            <p class="description"><?php esc_html_e('Hintergrundfarbe für ausgewählte Reaktionen.', 'reactifypress'); ?></p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">
-                            <label for="reactifypress-tooltip-background"><?php esc_html_e('Tooltip Background', 'reactifypress'); ?></label>
+                            <label for="reactifypress-tooltip-background"><?php esc_html_e('Tooltip-Hintergrund', 'reactifypress'); ?></label>
                         </th>
                         <td>
                             <input type="text" id="reactifypress-tooltip-background" name="reactifypress_settings[display][tooltip_background]" value="<?php echo esc_attr($settings['display']['tooltip_background']); ?>" class="reactifypress-color-picker" data-default-color="#333333">
+                            <p class="description"><?php esc_html_e('Hintergrundfarbe für Tooltips.', 'reactifypress'); ?></p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">
-                            <label for="reactifypress-tooltip-text-color"><?php esc_html_e('Tooltip Text Color', 'reactifypress'); ?></label>
+                            <label for="reactifypress-tooltip-text-color"><?php esc_html_e('Tooltip-Textfarbe', 'reactifypress'); ?></label>
                         </th>
                         <td>
                             <input type="text" id="reactifypress-tooltip-text-color" name="reactifypress_settings[display][tooltip_text_color]" value="<?php echo esc_attr($settings['display']['tooltip_text_color']); ?>" class="reactifypress-color-picker" data-default-color="#ffffff">
+                            <p class="description"><?php esc_html_e('Textfarbe für Tooltips.', 'reactifypress'); ?></p>
                         </td>
                     </tr>
                 </table>
 
                 <div class="reactifypress-preset-colors">
-                    <h3><?php esc_html_e('Color Presets', 'reactifypress'); ?></h3>
+                    <h3><?php esc_html_e('Farbvorlagen', 'reactifypress'); ?></h3>
+                    <p class="description"><?php esc_html_e('Klicken Sie auf eine Vorlage, um alle Farben automatisch zu setzen.', 'reactifypress'); ?></p>
                     <div class="reactifypress-presets">
                         <button type="button" class="button reactifypress-preset" data-preset="default">
                             <span class="reactifypress-preset-preview" style="background: linear-gradient(45deg, #fff 50%, #f1c40f 50%);"></span>
-                            <?php esc_html_e('Default', 'reactifypress'); ?>
+                            <?php esc_html_e('Standard', 'reactifypress'); ?>
                         </button>
                         <button type="button" class="button reactifypress-preset" data-preset="dark">
                             <span class="reactifypress-preset-preview" style="background: linear-gradient(45deg, #2c3e50 50%, #3498db 50%);"></span>
-                            <?php esc_html_e('Dark', 'reactifypress'); ?>
+                            <?php esc_html_e('Dunkel', 'reactifypress'); ?>
                         </button>
                         <button type="button" class="button reactifypress-preset" data-preset="minimal">
                             <span class="reactifypress-preset-preview" style="background: linear-gradient(45deg, #f8f8f8 50%, #333 50%);"></span>
@@ -220,7 +213,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                         </button>
                         <button type="button" class="button reactifypress-preset" data-preset="colorful">
                             <span class="reactifypress-preset-preview" style="background: linear-gradient(45deg, #e74c3c 25%, #3498db 25%, #3498db 50%, #2ecc71 50%, #2ecc71 75%, #f1c40f 75%);"></span>
-                            <?php esc_html_e('Colorful', 'reactifypress'); ?>
+                            <?php esc_html_e('Bunt', 'reactifypress'); ?>
                         </button>
                     </div>
                 </div>
@@ -229,14 +222,14 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
             <!-- Display Settings Tab -->
             <div id="tab-display">
                 <div class="reactifypress-section-header">
-                    <h2><?php esc_html_e('Display Settings', 'reactifypress'); ?></h2>
-                    <p><?php esc_html_e('Configure how and where reactions are displayed on your site.', 'reactifypress'); ?></p>
+                    <h2><?php esc_html_e('Anzeigeeinstellungen', 'reactifypress'); ?></h2>
+                    <p><?php esc_html_e('Konfigurieren Sie, wie und wo Reaktionen auf Ihrer Website angezeigt werden.', 'reactifypress'); ?></p>
                 </div>
 
                 <table class="form-table reactifypress-form-table">
                     <tr>
                         <th scope="row">
-                            <label for="reactifypress-display-position"><?php esc_html_e('Display Position', 'reactifypress'); ?></label>
+                            <label for="reactifypress-display-position"><?php esc_html_e('Anzeigeposition', 'reactifypress'); ?></label>
                         </th>
                         <td>
                             <select id="reactifypress-display-position" name="reactifypress_settings[display][position]" class="regular-text">
@@ -246,14 +239,14 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                                 <option value="manual" <?php selected($settings['display']['position'], 'manual'); ?>><?php esc_html_e('Manuell (mit Shortcode)', 'reactifypress'); ?></option>
                             </select>
                             <p class="description">
-                                <?php esc_html_e('Select where to display the reactions.', 'reactifypress'); ?>
-                                <code>[reactifypress]</code> <?php esc_html_e('or', 'reactifypress'); ?> <code>[reactifypress post_id="123"]</code>
+                                <?php esc_html_e('Wählen Sie aus, wo die Reaktionen angezeigt werden sollen. Für manuelle Platzierung verwenden Sie:', 'reactifypress'); ?>
+                                <br><code>[reactifypress]</code> <?php esc_html_e('oder', 'reactifypress'); ?> <code>[reactifypress post_id="123"]</code>
                             </p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">
-                            <?php esc_html_e('Display Options', 'reactifypress'); ?>
+                            <?php esc_html_e('Anzeigeoptionen', 'reactifypress'); ?>
                         </th>
                         <td>
                             <fieldset>
@@ -281,13 +274,13 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                     </tr>
                     <tr>
                         <th scope="row">
-                            <label for="reactifypress-alignment"><?php esc_html_e('Alignment', 'reactifypress'); ?></label>
+                            <label for="reactifypress-alignment"><?php esc_html_e('Ausrichtung', 'reactifypress'); ?></label>
                         </th>
                         <td>
                             <select id="reactifypress-alignment" name="reactifypress_settings[display][alignment]" class="regular-text">
-                                <option value="left" <?php selected(isset($settings['display']['alignment']) ? $settings['display']['alignment'] : 'left', 'left'); ?>><?php esc_html_e('Left', 'reactifypress'); ?></option>
-                                <option value="center" <?php selected(isset($settings['display']['alignment']) ? $settings['display']['alignment'] : 'left', 'center'); ?>><?php esc_html_e('Center', 'reactifypress'); ?></option>
-                                <option value="right" <?php selected(isset($settings['display']['alignment']) ? $settings['display']['alignment'] : 'left', 'right'); ?>><?php esc_html_e('Right', 'reactifypress'); ?></option>
+                                <option value="left" <?php selected(isset($settings['display']['alignment']) ? $settings['display']['alignment'] : 'left', 'left'); ?>><?php esc_html_e('Links', 'reactifypress'); ?></option>
+                                <option value="center" <?php selected(isset($settings['display']['alignment']) ? $settings['display']['alignment'] : 'left', 'center'); ?>><?php esc_html_e('Zentriert', 'reactifypress'); ?></option>
+                                <option value="right" <?php selected(isset($settings['display']['alignment']) ? $settings['display']['alignment'] : 'left', 'right'); ?>><?php esc_html_e('Rechts', 'reactifypress'); ?></option>
                             </select>
                         </td>
                     </tr>
@@ -297,8 +290,8 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
             <!-- Post Types Tab -->
             <div id="tab-post-types">
                 <div class="reactifypress-section-header">
-                    <h2><?php esc_html_e('Post Types', 'reactifypress'); ?></h2>
-                    <p><?php esc_html_e('Select which post types should display reactions.', 'reactifypress'); ?></p>
+                    <h2><?php esc_html_e('Beitragstypen', 'reactifypress'); ?></h2>
+                    <p><?php esc_html_e('Wählen Sie aus, welche Beitragstypen Reaktionen anzeigen sollen.', 'reactifypress'); ?></p>
                 </div>
 
                 <table class="form-table reactifypress-form-table">
@@ -330,59 +323,59 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
             <!-- Advanced Tab -->
             <div id="tab-advanced">
                 <div class="reactifypress-section-header">
-                    <h2><?php esc_html_e('Reaktionen verwalten', 'reactifypress'); ?></h2>
-                    <p><?php esc_html_e('Konfigurieren Sie die Reaktionen, die für Ihre Beiträge verfügbar sein sollen. Ziehen Sie sie, um die Reihenfolge zu ändern.', 'reactifypress'); ?></p>
+                    <h2><?php esc_html_e('Erweiterte Einstellungen', 'reactifypress'); ?></h2>
+                    <p><?php esc_html_e('Zusätzliche Konfigurationsoptionen für erweiterte Benutzer.', 'reactifypress'); ?></p>
                 </div>
 
                 <table class="form-table reactifypress-form-table">
                     <tr>
                         <th scope="row">
-                            <?php esc_html_e('User Restrictions', 'reactifypress'); ?>
+                            <?php esc_html_e('Benutzerbeschränkungen', 'reactifypress'); ?>
                         </th>
                         <td>
                             <fieldset>
                                 <label>
                                     <input type="checkbox" name="reactifypress_settings[advanced][require_login]" value="1" <?php checked(isset($settings['advanced']['require_login']) ? $settings['advanced']['require_login'] : false, true); ?>>
-                                    <?php esc_html_e('Require users to be logged in to react', 'reactifypress'); ?>
+                                    <?php esc_html_e('Benutzer müssen angemeldet sein, um zu reagieren', 'reactifypress'); ?>
                                 </label>
-                                <p class="description"><?php esc_html_e('When enabled, only logged-in users can add reactions.', 'reactifypress'); ?></p>
+                                <p class="description"><?php esc_html_e('Wenn aktiviert, können nur angemeldete Benutzer Reaktionen hinzufügen.', 'reactifypress'); ?></p>
                             </fieldset>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">
-                            <?php esc_html_e('Performance', 'reactifypress'); ?>
+                            <?php esc_html_e('Leistung', 'reactifypress'); ?>
                         </th>
                         <td>
                             <fieldset>
                                 <label>
                                     <input type="checkbox" name="reactifypress_settings[advanced][lazy_load]" value="1" <?php checked(isset($settings['advanced']['lazy_load']) ? $settings['advanced']['lazy_load'] : false, true); ?>>
-                                    <?php esc_html_e('Enable lazy loading of reactions', 'reactifypress'); ?>
+                                    <?php esc_html_e('Lazy Loading von Reaktionen aktivieren', 'reactifypress'); ?>
                                 </label>
-                                <p class="description"><?php esc_html_e('Load reaction counts via AJAX for better page performance.', 'reactifypress'); ?></p>
+                                <p class="description"><?php esc_html_e('Lädt Reaktionszahlen über AJAX für bessere Seitenleistung.', 'reactifypress'); ?></p>
                             </fieldset>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">
-                            <label for="reactifypress-custom-css"><?php esc_html_e('Custom CSS', 'reactifypress'); ?></label>
+                            <label for="reactifypress-custom-css"><?php esc_html_e('Benutzerdefiniertes CSS', 'reactifypress'); ?></label>
                         </th>
                         <td>
                             <textarea id="reactifypress-custom-css" name="reactifypress_settings[advanced][custom_css]" rows="10" cols="50" class="large-text code"><?php echo esc_textarea(isset($settings['advanced']['custom_css']) ? $settings['advanced']['custom_css'] : ''); ?></textarea>
-                            <p class="description"><?php esc_html_e('Add custom CSS to style reactions. No need to include <style> tags.', 'reactifypress'); ?></p>
+                            <p class="description"><?php esc_html_e('Fügen Sie benutzerdefiniertes CSS hinzu, um Reaktionen zu gestalten. Keine &lt;style&gt;-Tags erforderlich.', 'reactifypress'); ?></p>
                         </td>
                     </tr>
                 </table>
 
                 <div class="reactifypress-import-export">
-                    <h3><?php esc_html_e('Import/Export Settings', 'reactifypress'); ?></h3>
-                    <p><?php esc_html_e('Export your settings for backup or import settings from another site.', 'reactifypress'); ?></p>
+                    <h3><?php esc_html_e('Import/Export Einstellungen', 'reactifypress'); ?></h3>
+                    <p><?php esc_html_e('Exportieren Sie Ihre Einstellungen zur Sicherung oder importieren Sie Einstellungen von einer anderen Website.', 'reactifypress'); ?></p>
 
                     <div class="reactifypress-export">
                         <h4><?php esc_html_e('Export', 'reactifypress'); ?></h4>
                         <button type="button" id="reactifypress-export-settings" class="button">
                             <span class="dashicons dashicons-download"></span>
-                            <?php esc_html_e('Export Settings', 'reactifypress'); ?>
+                            <?php esc_html_e('Einstellungen exportieren', 'reactifypress'); ?>
                         </button>
                     </div>
 
@@ -391,7 +384,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                         <input type="file" id="reactifypress-import-file" accept=".json">
                         <button type="button" id="reactifypress-import-settings" class="button" disabled>
                             <span class="dashicons dashicons-upload"></span>
-                            <?php esc_html_e('Import Settings', 'reactifypress'); ?>
+                            <?php esc_html_e('Einstellungen importieren', 'reactifypress'); ?>
                         </button>
                     </div>
                 </div>
@@ -402,7 +395,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
             <p class="submit">
                 <?php submit_button(null, 'primary', 'submit', false); ?>
                 <button type="button" id="reactifypress-reset-settings" class="button reactifypress-reset-settings">
-                    <?php esc_html_e('Reset to Defaults', 'reactifypress'); ?>
+                    <?php esc_html_e('Auf Standard zurücksetzen', 'reactifypress'); ?>
                 </button>
             </p>
         </div>
@@ -411,7 +404,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
     <!-- Template for new reactions (hidden) -->
     <script type="text/template" id="reactifypress-reaction-template">
         <div class="reactifypress-reaction-item" data-index="{index}">
-            <div class="reactifypress-reaction-handle" title="<?php esc_attr_e('Drag to reorder', 'reactifypress'); ?>">
+            <div class="reactifypress-reaction-handle" title="<?php esc_attr_e('Ziehen zum Umordnen', 'reactifypress'); ?>">
                 <span class="dashicons dashicons-menu"></span>
             </div>
             
@@ -429,9 +422,9 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                 <div class="reactifypress-reaction-field">
                     <input type="text" 
                            name="reactifypress_settings[reactions][{index}][label]" 
-                           value="<?php esc_attr_e('New Reaction', 'reactifypress'); ?>" 
+                           value="<?php esc_attr_e('Neue Reaktion', 'reactifypress'); ?>" 
                            class="reactifypress-reaction-label regular-text" 
-                           placeholder="<?php esc_attr_e('Reaction Name', 'reactifypress'); ?>"
+                           placeholder="<?php esc_attr_e('Reaktionsname', 'reactifypress'); ?>"
                            required>
                 </div>
                 
@@ -443,11 +436,11 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                                class="reactifypress-reaction-active" 
                                checked>
                         <span class="reactifypress-switch-slider"></span>
-                        <span class="screen-reader-text"><?php esc_html_e('Active', 'reactifypress'); ?></span>
+                        <span class="screen-reader-text"><?php esc_html_e('Aktiv', 'reactifypress'); ?></span>
                     </label>
                 </div>
                 
-                <button type="button" class="reactifypress-delete-reaction" title="<?php esc_attr_e('Delete this reaction', 'reactifypress'); ?>">
+                <button type="button" class="reactifypress-delete-reaction" title="<?php esc_attr_e('Diese Reaktion löschen', 'reactifypress'); ?>">
                     <span class="dashicons dashicons-trash"></span>
                 </button>
             </div>
@@ -458,7 +451,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
     <div id="reactifypress-emoji-modal" class="reactifypress-modal" style="display: none;">
         <div class="reactifypress-modal-content">
             <div class="reactifypress-modal-header">
-                <h3><?php esc_html_e('Common Reaction Emojis', 'reactifypress'); ?></h3>
+                <h3><?php esc_html_e('Häufige Reaktions-Emojis', 'reactifypress'); ?></h3>
                 <button type="button" class="reactifypress-modal-close">&times;</button>
             </div>
             <div class="reactifypress-modal-body">
@@ -484,7 +477,7 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
                     <button type="button" class="reactifypress-emoji-button" data-emoji="🙌">🙌</button>
                     <button type="button" class="reactifypress-emoji-button" data-emoji="💔">💔</button>
                 </div>
-                <p class="description"><?php esc_html_e('Click an emoji to copy it to your clipboard.', 'reactifypress'); ?></p>
+                <p class="description"><?php esc_html_e('Klicken Sie auf ein Emoji, um es in die Zwischenablage zu kopieren.', 'reactifypress'); ?></p>
             </div>
         </div>
     </div>
@@ -602,21 +595,6 @@ $reset = isset($_GET['reset']) && $_GET['reset'];
 
     .reactifypress-delete-reaction:hover {
         color: #dc3232;
-    }
-
-    /* Live preview */
-    .reactifypress-appearance-preview {
-        background: #f5f5f5;
-        padding: 20px;
-        border-radius: 5px;
-        margin-bottom: 30px;
-    }
-
-    #reactifypress-live-preview {
-        background: #fff;
-        padding: 20px;
-        border-radius: 3px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     /* Preset buttons */
